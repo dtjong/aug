@@ -1,0 +1,26 @@
+<annotation>
+	<folder>resized</folder>
+	<filename>70.JPG</filename>
+	<path>/home/lexseal/Pictures/Data/resized/70.JPG</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>640</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>ARTag</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>152</xmin>
+			<ymin>198</ymin>
+			<xmax>295</xmax>
+			<ymax>367</ymax>
+		</bndbox>
+	</object>
+</annotation>
