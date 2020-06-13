@@ -2,11 +2,17 @@ package main
 
 import (
   "fmt"
+
+  "aug/imagedata"
+  "aug/readdata"
 )
 
-const loadDir = "test"
-const writeDir = "dest"
+const loadDir = "Data/test/"
+const writeDir = "Data/dest/"
+
+const labelFormat = imagedata.XML
 
 func main() {
-  fmt.Println("HOY");
+  images := readdata.ReadData(loadDir, labelFormat)
+  fmt.Println("Done augmenting!")
 }
