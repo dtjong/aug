@@ -17,3 +17,11 @@ type BBox struct {
   XMax float64
   YMax float64
 }
+
+func (data ImageData) Clone() ImageData {
+  return ImageData {
+    BBoxes: data.BBoxes,
+    Image: data.Image.Clone(),
+    Name: data.Name,
+  }
+}

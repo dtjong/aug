@@ -1,12 +1,14 @@
 package readdata
 
 import (
-  "fmt"
   "encoding/xml"
   "os"
   "io/ioutil"
 
+  "gocv.io/x/gocv"
+
   "aug/imagedata"
+  "aug/util"
 )
 
 type annotation struct {
@@ -22,15 +24,33 @@ type bbox struct {
   YMax int `xml:"bndbox>ymax"`
 }
 
-func ReadXml(filepath string) []imagedata.BBox {
+func ReadDataXml(dirname string, files []os.FileInfo) []imagedata.ImageData {
+  labels := util.FilterExt(files, ".xml")
+  images := util.FilterExt(files, ".jpg")
+
+  data := make([]imagedata.ImageData, 0)
+
+  for i := 0; i < len(labels); i++ {
+    imdata := imagedata.ImageData {
+      Image: gocv.IMRead(dirname + images[i].Name(), gocv.IMReadUnchanged),
+      BBoxes: readXml(dirname + labels[i].Name()),
+      Name: util.TrimExt(images[i].Name()),
+    }
+
+    data = append(data, imdata)
+  }
+
+  return data
+}
+
+func readXml(filepath string) []imagedata.BBox {
   bboxes := make([]imagedata.BBox, 0)
 
   // Read xml into struct
   file, err := os.Open(filepath)
 
   if err != nil {
-    fmt.Println("Error opening file " + filepath)
-    return bboxes
+    panic(err)
   }
 
   defer file.Close()
@@ -47,7 +67,7 @@ func ReadXml(filepath string) []imagedata.BBox {
       XMin: float64(box.XMin),
       YMin: float64(box.YMin),
       XMax: float64(box.XMax),
-      YMax: float64(box.XMax),
+      YMax: float64(box.YMax),
     })
   }
 

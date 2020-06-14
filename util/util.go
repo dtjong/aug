@@ -19,3 +19,14 @@ func FilterExt(arr []os.FileInfo, ext string) []os.FileInfo {
 
   return filtered
 }
+
+func Check(e error) {
+  if e != nil {
+    panic(e)
+  }
+}
+
+func TrimExt(filename string) string {
+  extension := filepath.Ext(filename)
+  return filename[0: len(filename) - len(extension)]
+}
