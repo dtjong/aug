@@ -20,6 +20,8 @@ type BBox struct {
   YMax float64
 }
 
+type Vecb []uint8
+
 func (data ImageData) Clone() ImageData {
   bboxesCopy := make([]BBox, len(data.BBoxes))
   copy(bboxesCopy, data.BBoxes)
@@ -29,8 +31,6 @@ func (data ImageData) Clone() ImageData {
     Name: data.Name,
   }
 }
-
-type Vecb []uint8
 
 func GetVecbAt(m gocv.Mat, row int, col int) Vecb {
 	ch := m.Channels()
